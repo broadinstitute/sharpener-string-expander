@@ -220,53 +220,53 @@ def transformer_info_get():  # noqa: E501
         parameters = [
             Parameter(
                 name = 'min combined score',
-                type = default_controls['min combined score'],
-                default = default_types['min combined score']
+                default = default_controls['min combined score'],
+                type = default_types['min combined score']
             ),
             Parameter(
                 name = 'min neighborhood score',
-                type = default_controls['min neighborhood score'],
-                default = default_types['min neighborhood score']
+                default = default_controls['min neighborhood score'],
+                type = default_types['min neighborhood score']
             ),
             Parameter(
                 name = 'min gene fusion score',
-                type = default_controls['min gene fusion score'],
-                default = default_types['min gene fusion score']
+                default = default_controls['min gene fusion score'],
+                type = default_types['min gene fusion score']
             ),
             Parameter(
                 name = 'min phylogenic profile score',
-                type = default_controls['min phylogenic profile score'],
-                default = default_types['min phylogenic profile score']
+                default = default_controls['min phylogenic profile score'],
+                type = default_types['min phylogenic profile score']
             ),
             Parameter(
                 name = 'min coexpression score',
-                type = default_controls['min coexpression score'],
-                default = default_types['min coexpression score']
+                default = default_controls['min coexpression score'],
+                type = default_types['min coexpression score']
             ),
             Parameter(
                 name = 'min experimental score',
-                type = default_controls['min experimental score'],
-                default = default_types['min experimental score']
+                default = default_controls['min experimental score'],
+                type = default_types['min experimental score']
             ),
             Parameter(
                 name = 'min database score',
-                type = default_controls['min database score'],
-                default = default_types['min database score']
+                default = default_controls['min database score'],
+                type = default_types['min database score']
             ),
             Parameter(
                 name = 'min textmining score',
-                type = default_controls['min textmining score'],
-                default = default_types['min textmining score']
+                default = default_controls['min textmining score'],
+                type = default_types['min textmining score']
             ),
             Parameter(
                 name = 'min non-textmining score',
-                type = default_controls['min non-textmining score'],
-                default = default_types['min non-textmining score']
+                default = default_controls['min non-textmining score'],
+                type = default_types['min non-textmining score']
             ),
             Parameter(
                 name = 'limit',
-                type = default_controls['limit'],
-                default = default_types['limit']
+                default = default_controls['limit'],
+                type = default_types['limit']
             ),
         ],
         required_attributes = ['identifiers.entrez','gene_symbol']

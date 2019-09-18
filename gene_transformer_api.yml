@@ -1,10 +1,10 @@
 swagger: '2.0'
 info:
-  title: API for gene-list transformers
+  title: STRING expander
   version: 1.2.0
-  description: API for gene-list transformers.
+  description: Gene set expander for STRING sharpener.
 host: sharpener.ncats.io
-basePath: /<transformer-path>
+basePath: /string_expander
 schemes:
 - "https"
 

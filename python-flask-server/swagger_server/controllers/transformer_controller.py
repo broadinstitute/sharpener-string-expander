@@ -14,9 +14,9 @@ import requests
 
 species = "9606"
 
-default_controls = {'min combined score': .4, 'min neighborhood score': 0, 'min gene fusion score': 0, 'min phylogenic profile score': 0, 'min coexpression score': 0, 'min experimental score': 0, 'min database score': 0, 'min textmining score': 0, 'min non-textmining score': 0, 'limit': 10}
+default_controls = {'minimum combined score': .4, 'minimum neighborhood score': 0, 'minimum gene fusion score': 0, 'minimum cooccurence score': 0, 'minimum coexpression score': 0, 'minimum experimental score': 0, 'minimum database score': 0, 'minimum textmining score': 0, 'minimum best non-textmining component score': 0, 'maximum number of genes': 8}
 
-default_types = {'min combined score': 'double', 'min neighborhood score': 'double', 'min gene fusion score': 'double', 'min phylogenic profile score': 'double', 'min coexpression score': 'double', 'min experimental score': 'double', 'min database score': 'double', 'min textmining score': 'double', 'min non-textmining score': 'double', 'limit': 'int'}
+default_types = {'minimum combined score': 'double', 'minimum neighborhood score': 'double', 'minimum gene fusion score': 'double', 'minimum cooccurence score': 'double', 'minimum coexpression score': 'double', 'minimum experimental score': 'double', 'minimum database score': 'double', 'minimum textmining score': 'double', 'minimum best non-textmining component score': 'double', 'maximum number of genes': 'int'}
 
 def transform_post(query):  # noqa: E501
     """transform_post
@@ -39,10 +39,10 @@ def transform_post(query):  # noqa: E501
     #Add the originally input genes
     gene_list = query.genes
     genes = dict([(entrez_gene_id(gene) if entrez_gene_id(gene) != None else gene.gene_id, None) for gene in gene_list])
-    
+
     my_genes = genes.keys()
-    limit = get_control(controls, 'limit')
-    required_score = get_control(controls, 'min combined score')
+    limit = get_control(controls, 'maximum number of genes')
+    required_score = get_control(controls, 'minimum combined score')
     my_app = "sharpener.ncats.io"
 
     ## Construct the request
@@ -91,11 +91,11 @@ def transform_post(query):  # noqa: E501
         else:
             partner_gene_id = map_symbol_to_entrez_id(partner_gene_symbol)
             symbol_to_id[partner_gene_symbol] = partner_gene_id
-            
+
         if partner_gene_id in genes:
             continue
 
-        if combined_score >= get_control(controls, 'min combined score') and nscore >= get_control(controls, 'min neighborhood score') and fscore >= get_control(controls, 'min gene fusion score') and pscore >= get_control(controls, 'min phylogenic profile score') and ascore >= get_control(controls, 'min coexpression score') and escore >= get_control(controls, 'min experimental score') and dscore >= get_control(controls, 'min database score') and tscore >= get_control(controls, 'min textmining score') and max(nscore,fscore,pscore,ascore,escore,dscore) >= get_control(controls, 'min non-textmining score'):
+        if combined_score >= get_control(controls, 'minimum combined score') and nscore >= get_control(controls, 'minimum neighborhood score') and fscore >= get_control(controls, 'minimum gene fusion score') and pscore >= get_control(controls, 'minimum cooccurence score') and ascore >= get_control(controls, 'minimum coexpression score') and escore >= get_control(controls, 'minimum experimental score') and dscore >= get_control(controls, 'minimum database score') and tscore >= get_control(controls, 'minimum textmining score') and max(nscore,fscore,pscore,ascore,escore,dscore) >= get_control(controls, 'minimum best non-textmining component score'):
             genes[partner_gene_id] = GeneInfo(
                 gene_id = partner_gene_id,
                 attributes = [
@@ -214,62 +214,62 @@ def transformer_info_get():  # noqa: E501
     """
 
     return TransformerInfo(
-        name = 'STRING interaction expander',
+        name = 'STRING protein-protein interaction',
         function = 'expander',
         #operation = 'interaction',
         #ui_label = 'STRING',
         #source_url = 'https://string-db.org/cgi/help.pl?sessionId=Gp0OeWrM9UF4&subpage=api',
-        description = 'Gene-list expander based on STRING interactions.',
+        description = 'Gene-list expander based on STRING protein-protein functional interactions (https://string-db.org/).',
         parameters = [
             Parameter(
-                name = 'min combined score',
-                default = default_controls['min combined score'],
-                type = default_types['min combined score']
+                name = 'minimum combined score',
+                default = default_controls['minimum combined score'],
+                type = default_types['minimum combined score']
             ),
             Parameter(
-                name = 'min neighborhood score',
-                default = default_controls['min neighborhood score'],
-                type = default_types['min neighborhood score']
+                name = 'minimum neighborhood score',
+                default = default_controls['minimum neighborhood score'],
+                type = default_types['minimum neighborhood score']
             ),
             Parameter(
-                name = 'min gene fusion score',
-                default = default_controls['min gene fusion score'],
-                type = default_types['min gene fusion score']
+                name = 'minimum gene fusion score',
+                default = default_controls['minimum gene fusion score'],
+                type = default_types['minimum gene fusion score']
             ),
             Parameter(
-                name = 'min phylogenic profile score',
-                default = default_controls['min phylogenic profile score'],
-                type = default_types['min phylogenic profile score']
+                name = 'minimum cooccurence score',
+                default = default_controls['minimum cooccurence score'],
+                type = default_types['minimum cooccurence score']
             ),
             Parameter(
-                name = 'min coexpression score',
-                default = default_controls['min coexpression score'],
-                type = default_types['min coexpression score']
+                name = 'minimum coexpression score',
+                default = default_controls['minimum coexpression score'],
+                type = default_types['minimum coexpression score']
             ),
             Parameter(
-                name = 'min experimental score',
-                default = default_controls['min experimental score'],
-                type = default_types['min experimental score']
+                name = 'minimum experimental score',
+                default = default_controls['minimum experimental score'],
+                type = default_types['minimum experimental score']
             ),
             Parameter(
-                name = 'min database score',
-                default = default_controls['min database score'],
-                type = default_types['min database score']
+                name = 'minimum database score',
+                default = default_controls['minimum database score'],
+                type = default_types['minimum database score']
             ),
             Parameter(
-                name = 'min textmining score',
-                default = default_controls['min textmining score'],
-                type = default_types['min textmining score']
+                name = 'minimum textmining score',
+                default = default_controls['minimum textmining score'],
+                type = default_types['minimum textmining score']
             ),
             Parameter(
-                name = 'min non-textmining score',
-                default = default_controls['min non-textmining score'],
-                type = default_types['min non-textmining score']
+                name = 'minimum best non-textmining component score',
+                default = default_controls['minimum best non-textmining component score'],
+                type = default_types['minimum best non-textmining component score']
             ),
             Parameter(
-                name = 'limit',
-                default = default_controls['limit'],
-                type = default_types['limit']
+                name = 'maximum number of genes',
+                default = default_controls['maximum number of genes'],
+                type = default_types['maximum number of genes']
             ),
         ],
         required_attributes = ['identifiers.entrez','gene_symbol']

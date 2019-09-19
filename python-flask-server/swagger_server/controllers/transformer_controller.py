@@ -216,6 +216,9 @@ def transformer_info_get():  # noqa: E501
     return TransformerInfo(
         name = 'STRING interaction expander',
         function = 'expander',
+        operation = 'interaction',
+        ui_label = 'STRING',
+        source_url = 'https://string-db.org/cgi/help.pl?sessionId=Gp0OeWrM9UF4&subpage=api',
         description = 'Gene-list expander based on STRING interactions.',
         parameters = [
             Parameter(
